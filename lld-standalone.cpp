@@ -85,8 +85,9 @@ static void setTargetTriple(StringRef argv0, opt::InputArgList &args) {
 }
 
 static void prependNetBSDCustomization(std::vector<StringRef> &args) {
-  // force-disable RO segment due to ld.elf_so limitations
+  // force-disable RO segment and RELRO due to ld.elf_so limitations
   args.push_back("--no-rosegment");
+  args.push_back("-znorelro");
 
   // force-disable superfluous RUNPATH
   args.push_back("--disable-new-dtags");
